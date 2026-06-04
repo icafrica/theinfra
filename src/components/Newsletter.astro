@@ -1,0 +1,257 @@
+---
+---
+<section id="newsletter" class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-box card">
+      <div class="newsletter-header">
+        <span class="section-tag">// WEEKLY INTEL</span>
+        <h2 class="box-title">Subscribe to <span class="text-glow">The Stack</span></h2>
+        <p class="box-desc">
+          Get weekly deep dives on database internals, Linux kernel tuning, high-performance networking, and platform engineering patterns. Strictly engineering.
+        </p>
+      </div>
+
+      <!-- Subscription Form -->
+      <form id="subscribe-form" class="subscribe-form">
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="e.g. srenator@systems.corp" required />
+          </div>
+          
+          <div class="form-group flex-1">
+            <label for="role" class="form-label">Primary Role</label>
+            <select id="role" class="form-input select-input" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="sre">SRE / Operations</option>
+              <option value="platform">Platform Engineer</option>
+              <option value="software">Software Engineer</option>
+              <option value="architect">Systems Architect</option>
+              <option value="manager">Engineering Leader</option>
+              <option value="other">Other / Enthusiast</option>
+            </select>
+          </div>
+
+          <div class="form-group flex-1">
+            <label for="region" class="form-label">Primary Location</label>
+            <select id="region" class="form-input select-input" required>
+              <option value="" disabled selected>Select location</option>
+              <option value="NG">Nigeria</option>
+              <option value="KE">Kenya</option>
+              <option value="ZA">South Africa</option>
+              <option value="GH">Ghana</option>
+              <option value="UK">United Kingdom</option>
+              <option value="US">United States</option>
+              <option value="OTHER">Other Region</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">
+          <span>Join the Stack</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="send-icon"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+
+      <!-- Terminal Success Output -->
+      <div id="newsletter-success" class="success-terminal">
+        <div class="success-header">
+          <span class="status-dot"></span>
+          <span class="success-title">SYSTEM RESPONSE: 201 CREATED</span>
+        </div>
+        <div class="success-body">
+          <div class="success-line"><span class="success-prompt">&gt;</span> <span class="success-text">Email queued for validation:</span> <span class="success-val" id="success-email"></span></div>
+          <div class="success-line"><span class="success-prompt">&gt;</span> <span class="success-text">Assigned routing tag:</span> <span class="success-val" id="success-routing"></span></div>
+          <div class="success-line"><span class="success-prompt">&gt;</span> <span class="success-text">Confirmation link dispatched to host.</span></div>
+          <div class="success-line success-banner">WELCOME TO THE SYSTEM LAYER. FIRST WEEKLY DEEP DIVE EN ROUTE.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('subscribe-form') as HTMLFormElement;
+  const successBox = document.getElementById('newsletter-success');
+  const successEmail = document.getElementById('success-email');
+  const successRouting = document.getElementById('success-routing');
+
+  if (form && successBox && successEmail && successRouting) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const emailVal = (document.getElementById('email') as HTMLInputElement).value;
+      const roleVal = (document.getElementById('role') as HTMLSelectElement).value;
+      const regionVal = (document.getElementById('region') as HTMLSelectElement).value;
+
+      // Update success details
+      successEmail.textContent = emailVal;
+      successRouting.textContent = `media.stack.${roleVal}.${regionVal.toLowerCase()}`;
+
+      // Transition effects
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+      successBox.classList.add('fade-in');
+    });
+  }
+</script>
+
+<style>
+  .newsletter-section {
+    padding: var(--space-xxl) 0;
+  }
+
+  .newsletter-box {
+    background: radial-gradient(circle at 100% 100%, #0c2b20 0%, var(--bg-surface) 60%);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xxl) var(--space-xl);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .newsletter-box::after {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .newsletter-header {
+    margin-bottom: var(--space-xl);
+    max-width: 700px;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .box-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .box-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-row {
+    display: flex;
+    gap: var(--space-md);
+    width: 100%;
+  }
+
+  .flex-1 { flex: 1; }
+  .flex-2 { flex: 2; }
+
+  .select-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%237fffc5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+  }
+
+  .submit-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.85rem 2rem;
+  }
+
+  .send-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  .submit-btn:hover .send-icon {
+    transform: translate(2px, -2px);
+  }
+
+  /* Success Terminal */
+  .success-terminal {
+    display: none;
+    background-color: #030d0a;
+    border: 1px solid var(--border-color-glow);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    padding: var(--space-md);
+    overflow: hidden;
+  }
+
+  .success-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .success-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .success-body {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .success-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .success-prompt {
+    color: var(--accent-muted);
+  }
+
+  .success-val {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .success-banner {
+    margin-top: var(--space-sm);
+    background-color: rgba(127, 255, 197, 0.05);
+    border-left: 2px solid var(--accent);
+    padding: var(--space-sm);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 900px) {
+    .form-row {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

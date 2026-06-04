@@ -1,0 +1,428 @@
+---
+---
+<section id="research" class="research-section">
+  <div class="container research-grid-layout">
+    <div class="research-content">
+      <span class="section-tag">// DATA ARCHIVE</span>
+      <h2 class="section-title">State of Infra <span class="text-glow">Research</span></h2>
+      <p class="section-desc">
+        Our annual research report provides hard statistical benchmarks on infrastructure choices, cloud spend efficiency, tooling adoption, and engineering salaries across Africa and emerging markets.
+      </p>
+      
+      <div class="research-highlights">
+        <div class="highlight-item">
+          <span class="highlight-number">1,200+</span>
+          <span class="highlight-label">Engineers Surveyed</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-number">15+</span>
+          <span class="highlight-label">Countries Represented</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-number">2027</span>
+          <span class="highlight-label">First Report Launch</span>
+        </div>
+      </div>
+
+      <div class="research-cta">
+        <a href="#newsletter" class="btn btn-primary">Get Notified on Launch</a>
+      </div>
+    </div>
+
+    <!-- Interactive Data Chart Widget -->
+    <div class="research-widget card">
+      <div class="widget-header">
+        <div class="widget-meta">
+          <span class="status-dot"></span>
+          <span class="widget-title">PREVIEW: 2027 DATA PROJECTIONS</span>
+        </div>
+        <div class="widget-tabs">
+          <button class="tab-btn active" data-tab="clouds">Clouds</button>
+          <button class="tab-btn" data-tab="orchestration">Orchestration</button>
+          <button class="tab-btn" data-tab="priorities">Priorities</button>
+        </div>
+      </div>
+
+      <div class="widget-body">
+        <!-- Clouds Tab -->
+        <div class="tab-panel active" id="panel-clouds">
+          <p class="panel-intro">Primary Cloud Infrastructure Hosting Distribution</p>
+          <div class="bar-chart">
+            <div class="chart-row">
+              <div class="row-label">AWS</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 58%"></div>
+              </div>
+              <div class="row-value">58%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">GCP</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 22%"></div>
+              </div>
+              <div class="row-value">22%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">Self-Hosted</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 12%"></div>
+              </div>
+              <div class="row-value">12%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">Azure</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 8%"></div>
+              </div>
+              <div class="row-value">8%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orchestration Tab -->
+        <div class="tab-panel" id="panel-orchestration">
+          <p class="panel-intro">Primary Container Orchestration Engines</p>
+          <div class="bar-chart">
+            <div class="chart-row">
+              <div class="row-label">Kubernetes</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 64%"></div>
+              </div>
+              <div class="row-value">64%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">Docker Compose</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 20%"></div>
+              </div>
+              <div class="row-value">20%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">Nomad</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 11%"></div>
+              </div>
+              <div class="row-value">11%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">ECS/Other</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 5%"></div>
+              </div>
+              <div class="row-value">5%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Priorities Tab -->
+        <div class="tab-panel" id="panel-priorities">
+          <p class="panel-intro">Top Infrastructure Priorities for Next 12 Months</p>
+          <div class="bar-chart">
+            <div class="chart-row">
+              <div class="row-label">Cost Optimization</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 44%"></div>
+              </div>
+              <div class="row-value">44%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">High Availability</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 28%"></div>
+              </div>
+              <div class="row-value">28%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">Security & Audits</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 18%"></div>
+              </div>
+              <div class="row-value">18%</div>
+            </div>
+            <div class="chart-row">
+              <div class="row-label">DevDX Platform</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 10%"></div>
+              </div>
+              <div class="row-value">10%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="widget-footer">
+        <span class="data-source">// SAMPLE POOL: N=342 PRACTITIONERS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-tab');
+      
+      // Remove active states from buttons
+      tabButtons.forEach(b => b.classList.remove('active'));
+      // Remove active states from panels
+      tabPanels.forEach(p => p.classList.remove('active'));
+
+      // Add active state to clicked button
+      btn.classList.add('active');
+
+      // Add active state to matching panel
+      const targetPanel = document.getElementById(`panel-${tabId}`);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+        
+        // Trigger CSS animation by temporarily clearing widths and resetting
+        const fills = targetPanel.querySelectorAll('.bar-fill');
+        fills.forEach(fill => {
+          const targetWidth = fill.style.width;
+          fill.style.width = '0%';
+          // Force layout reflow
+          fill.getBoundingClientRect();
+          fill.style.width = targetWidth;
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  .research-section {
+    padding: var(--space-xxl) 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .research-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-xxl);
+    align-items: center;
+  }
+
+  .research-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .research-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+  }
+
+  .highlight-item {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: var(--space-md);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .highlight-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .highlight-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .research-cta {
+    margin-top: var(--space-sm);
+  }
+
+  /* Interactive Data Widget */
+  .research-widget {
+    background-color: var(--bg-surface);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-sm);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .widget-meta {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .widget-title {
+    font-weight: 500;
+  }
+
+  .widget-tabs {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .tab-btn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .tab-btn:hover {
+    color: var(--accent);
+    background-color: var(--bg-surface-elevated);
+  }
+
+  .tab-btn.active {
+    color: var(--bg-base);
+    background-color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .widget-body {
+    min-height: 180px;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .panel-intro {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
+
+  /* Bar Chart Styling */
+  .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .chart-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .row-label {
+    width: 110px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bar-container {
+    flex-grow: 1;
+    height: 14px;
+    background-color: var(--bg-surface-elevated);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background-color: var(--accent-muted);
+    border-radius: 3px;
+    width: 0%; /* Initial state for animation */
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Animate bars when active */
+  .tab-panel.active .bar-fill {
+    background-color: var(--accent);
+    box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.2);
+  }
+
+  .row-value {
+    width: 35px;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  .widget-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-sm);
+  }
+
+  .data-source {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* Responsive Styling */
+  @media (max-width: 900px) {
+    .research-grid-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .widget-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    
+    .widget-tabs {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .tab-btn {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .research-highlights {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+  }
+</style>

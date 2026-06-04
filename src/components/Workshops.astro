@@ -1,0 +1,368 @@
+---
+const workshops = [
+  {
+    company: "Datadog",
+    title: "Observability at Scale: eBPF-powered Metrics Pipeline",
+    tags: ["ebpf", "observability", "metrics"],
+    duration: "48:12",
+    tier: "Sponsor",
+  },
+  {
+    company: "Grafana Labs",
+    title: "Building a Unified Infra Dashboard with Loki + Tempo",
+    tags: ["grafana", "loki", "tracing"],
+    duration: "52:34",
+    tier: "Paid",
+  },
+  {
+    company: "Cilium / Isovalent",
+    title: "Zero-Trust Networking with eBPF & Cilium CNI",
+    tags: ["cilium", "ebpf", "networking"],
+    duration: "61:07",
+    tier: "Sponsor",
+  },
+];
+---
+
+<section id="workshops" class="workshops-section">
+  <div class="container workshops-layout">
+    <!-- Left: Description -->
+    <div class="workshops-content">
+      <span class="section-tag">// INFRA WORKSHOPS</span>
+      <h2 class="section-title">
+        Company Workshops<br />
+        <span class="text-glow">on the Channel</span>
+      </h2>
+
+      <p class="section-desc">
+        Infrastructure companies can publish their recorded, in-depth workshops and deep-dive sessions directly to theinfraTV — reaching a dedicated audience of engineers who build at scale.
+      </p>
+
+      <div class="tier-list">
+        <div class="tier-item">
+          <span class="tier-badge tier-sponsor">SPONSOR PERK</span>
+          <p class="tier-desc">Included automatically for initiative sponsors — one workshop slot per sponsorship tier.</p>
+        </div>
+        <div class="tier-item">
+          <span class="tier-badge tier-paid">PAID SLOT</span>
+          <p class="tier-desc">Non-sponsors can book a dedicated workshop slot. Pricing based on production quality and promotion.</p>
+        </div>
+      </div>
+
+      <div class="workshops-ctas">
+        <a href="mailto:workshops@theinfra.media" class="btn btn-primary">Submit a Workshop</a>
+        <a href="https://youtube.com/@theinfra" target="_blank" rel="noopener noreferrer" class="btn">View theinfraTV →</a>
+      </div>
+    </div>
+
+    <!-- Right: Preview Cards -->
+    <div class="workshops-preview">
+      <div class="preview-header">
+        <span class="preview-label">
+          <span class="status-dot"></span>
+          RECENT WORKSHOPS
+        </span>
+        <span class="preview-count">Coming Q3 2026</span>
+      </div>
+
+      <div class="workshop-cards">
+        {workshops.map((w) => (
+          <div class="workshop-card">
+            <div class="wcard-top">
+              <span class="wcard-company">{w.company}</span>
+              <span class={`wcard-tier ${w.tier === 'Sponsor' ? 'tier-s' : 'tier-p'}`}>
+                {w.tier === 'Sponsor' ? '★ SPONSOR' : '$ PAID'}
+              </span>
+            </div>
+            <p class="wcard-title">{w.title}</p>
+            <div class="wcard-bottom">
+              <div class="wcard-tags">
+                {w.tags.map((tag) => (
+                  <span class="wtag">#{tag}</span>
+                ))}
+              </div>
+              <span class="wcard-duration">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                {w.duration}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="preview-footer">
+        <span class="footer-note">// All workshops reviewed for technical depth before publishing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .workshops-section {
+    padding: var(--space-xxl) 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .workshops-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--space-xxl);
+    align-items: flex-start;
+  }
+
+  /* ── Left Content ── */
+  .workshops-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Tier pills */
+  .tier-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-sm) 0;
+  }
+
+  .tier-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+  }
+
+  .tier-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .tier-sponsor {
+    background: rgba(127, 255, 197, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(127, 255, 197, 0.2);
+  }
+
+  .tier-paid {
+    background: rgba(56, 182, 255, 0.1);
+    color: #38b6ff;
+    border: 1px solid rgba(56, 182, 255, 0.2);
+  }
+
+  .tier-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .workshops-ctas {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-xs);
+  }
+
+  /* ── Right Preview Panel ── */
+  .workshops-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .workshops-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-muted), var(--accent), transparent);
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .preview-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .preview-count {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: #ffbd2e;
+    background: rgba(255, 189, 46, 0.08);
+    border: 1px solid rgba(255, 189, 46, 0.2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Workshop cards */
+  .workshop-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .workshop-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color var(--transition-fast);
+  }
+
+  .workshop-card:hover {
+    border-color: var(--accent-muted);
+  }
+
+  .wcard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wcard-company {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .wcard-tier {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+  }
+
+  .tier-s {
+    background: rgba(127, 255, 197, 0.08);
+    color: var(--accent);
+    border: 1px solid rgba(127, 255, 197, 0.15);
+  }
+
+  .tier-p {
+    background: rgba(56, 182, 255, 0.08);
+    color: #38b6ff;
+    border: 1px solid rgba(56, 182, 255, 0.15);
+  }
+
+  .wcard-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+
+  .wcard-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wcard-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .wtag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent-muted);
+  }
+
+  .wcard-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .preview-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-sm);
+  }
+
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .workshops-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .workshops-ctas {
+      flex-direction: column;
+    }
+    .workshops-ctas .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+</style>

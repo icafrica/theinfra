@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Logo Mark integrated at left -->
+  <g transform="translate(10, 12) scale(0.7)">
+    <!-- t path -->
+    <path d="M40 25 V70 C40 76, 46 80, 52 80" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M28 42 H52" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" />
+
+    <!-- i path -->
+    <path d="M70 42 V80" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" />
+    
+    <!-- i dot -->
+    <circle cx="70" cy="25" r="5.5" fill="#7fffc5" filter="url(#glow)" />
+  </g>
+
+  <!-- Text: theinfra -->
+  <text x="76" y="45" font-family="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="800" fill="#f0fdf4" letter-spacing="-0.03em">the<tspan fill="#7fffc5">infra</tspan></text>
+  
+  <!-- Subtitle: SYSTEM LAYER -->
+  <text x="76" y="60" font-family="'DM Mono', monospace" font-size="9" font-weight="500" fill="#4ab38a" letter-spacing="0.25em">SYSTEM LAYER</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Glowing effects -->
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- t path (infrastructure pipeline style) -->
+  <path d="M40 25 V70 C40 76, 46 80, 52 80" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M28 42 H52" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" />
+
+  <!-- i path -->
+  <path d="M70 42 V80" stroke="#7fffc5" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- i dot (glowing node) -->
+  <circle cx="70" cy="25" r="5.5" fill="#7fffc5" filter="url(#glow)" />
+</svg>

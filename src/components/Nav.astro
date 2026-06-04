@@ -1,0 +1,256 @@
+---
+---
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="/" class="brand">
+      <img src="/wordmark.svg" alt="theinfra Logo" class="logo" height="40" />
+    </a>
+    
+    <!-- Mobile Hamburger Toggle -->
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    
+    <!-- Navigation Links -->
+    <nav class="nav-menu" id="nav-menu">
+      <ul class="nav-list">
+        <li><a href="/#initiatives" class="nav-link">Initiatives</a></li>
+        <li><a href="/newsletter" class="nav-link">Newsletter</a></li>
+        <li><a href="/podcast" class="nav-link">Podcast</a></li>
+        <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener noreferrer" class="nav-link external-link">
+          InfraConf CFP
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="external-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a></li>
+        <li class="cta-item"><a href="https://discord.gg/thelayer" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Join The Layer</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked (useful for anchor links on same page)
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  }
+</script>
+
+<style>
+  .navbar {
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(5, 21, 15, 0.85);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+  }
+
+  .brand:hover {
+    transform: scale(1.02);
+  }
+
+  .logo {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: var(--space-lg);
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding: var(--space-xs) var(--space-sm);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: var(--space-sm);
+    right: var(--space-sm);
+    height: 1px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .external-icon {
+    opacity: 0.7;
+    transition: transform var(--transition-fast);
+  }
+
+  .nav-link:hover .external-icon {
+    transform: translate(1px, -1px);
+    opacity: 1;
+  }
+
+  .btn-discord {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-color: #5865F2;
+    color: #f0fdf4;
+    background-color: rgba(88, 101, 242, 0.1);
+  }
+
+  .btn-discord:hover {
+    background-color: #5865F2;
+    border-color: #5865F2;
+    color: white;
+    box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+  }
+
+  /* Hamburger Button */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all var(--transition-normal);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background-color: var(--bg-surface);
+      border-left: 1px solid var(--border-color);
+      padding: calc(var(--header-height) + var(--space-xl)) var(--space-lg) var(--space-lg);
+      transform: translateX(100%);
+      transition: transform var(--transition-normal);
+      z-index: 99;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-menu.active {
+      transform: translateX(0);
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      width: 100%;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+      padding: var(--space-sm) 0;
+      width: 100%;
+    }
+
+    .nav-link::after {
+      left: 0;
+      right: auto;
+      width: 40px;
+    }
+
+    .cta-item {
+      margin-top: var(--space-md);
+      width: 100%;
+    }
+
+    .btn-discord {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      padding: 0.75rem;
+    }
+
+    /* Hamburger Animation */
+    .nav-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -8px);
+    }
+  }
+</style>

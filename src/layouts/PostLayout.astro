@@ -1,0 +1,363 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    date: string;
+    author?: string;
+    episodeNumber?: string; // For podcasts
+    audioUrl?: string; // For podcasts
+    duration?: string; // For podcasts
+    issueNumber?: string; // For newsletter
+    tags?: string[];
+  };
+  backUrl: string;
+  backText: string;
+}
+
+const { frontmatter, backUrl, backText } = Astro.props;
+const { title, description, date, author, episodeNumber, audioUrl, duration, issueNumber, tags } = frontmatter;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — theinfra`} description={description}>
+  <article class="post-layout container">
+    <header class="post-header">
+      <a href={backUrl} class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        {backText}
+      </a>
+      
+      <div class="post-meta">
+        {issueNumber && <span class="badge">Issue #{issueNumber}</span>}
+        {episodeNumber && <span class="badge">Episode #{episodeNumber}</span>}
+        <time datetime={date}>{formattedDate}</time>
+        {duration && <span class="duration">• {duration}</span>}
+      </div>
+
+      <h1 class="post-title">{title}</h1>
+      
+      {author && <p class="post-author">Written by {author}</p>}
+
+      {tags && tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map((tag) => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {audioUrl && (
+      <div class="podcast-player-box card">
+        <div class="player-info">
+          <span class="status-dot"></span>
+          <span class="player-title">Listen to Episode #{episodeNumber}</span>
+        </div>
+        <audio controls src={audioUrl} class="audio-element"></audio>
+        <div class="player-links">
+          <a href="#" class="player-service">Spotify</a>
+          <a href="#" class="player-service">Apple Podcasts</a>
+          <a href="#" class="player-service">Google Podcasts</a>
+          <a href="#" class="player-service">RSS Feed</a>
+        </div>
+      </div>
+    )}
+
+    <section class="post-content">
+      <slot />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg) var(--space-xxl);
+  }
+
+  .post-header {
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-lg);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--accent-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-4px);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: var(--space-sm);
+  }
+
+  .badge {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .post-title {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+  }
+
+  .post-author {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-muted);
+  }
+
+  /* Podcast Player styles */
+  .podcast-player-box {
+    margin-bottom: var(--space-xl);
+    background: var(--bg-surface-elevated);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    border: 1px solid var(--border-color-glow);
+  }
+
+  .player-info {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .player-title {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .audio-element {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border-radius: 4px;
+  }
+
+  /* Custom audio styling for modern browser players */
+  audio::-webkit-media-controls-panel {
+    background-color: var(--bg-surface);
+  }
+  audio::-webkit-media-controls-play-button,
+  audio::-webkit-media-controls-mute-button {
+    filter: invert(1);
+  }
+  audio::-webkit-media-controls-current-time-display,
+  audio::-webkit-media-controls-time-remaining-display {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+
+  .player-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-sm);
+  }
+
+  .player-service {
+    color: var(--text-dim);
+  }
+
+  .player-service:hover {
+    color: var(--accent);
+  }
+
+  /* Markdown post content overrides */
+  .post-content {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(p) {
+    margin-bottom: var(--space-lg);
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.75rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.4rem;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-xl);
+  }
+
+  .post-content :global(li) {
+    margin-bottom: var(--space-xs);
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--accent);
+    background: var(--bg-surface);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-lg) 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .post-content :global(blockquote p) {
+    margin-bottom: 0;
+    font-style: italic;
+    color: var(--text-primary);
+  }
+
+  /* Alert Callout Styles */
+  .post-content :global(blockquote.alert-callout) {
+    border-left-width: 4px;
+    border-radius: 4px;
+    font-style: normal;
+    padding: 1rem 1.25rem;
+  }
+
+  .post-content :global(blockquote.alert-callout p) {
+    font-style: normal;
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(blockquote.alert-callout p.alert-title) {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Callout Variants */
+  .post-content :global(blockquote.alert-important) {
+    border-left-color: var(--accent);
+    background-color: rgba(127, 255, 197, 0.04);
+  }
+  .post-content :global(blockquote.alert-important p.alert-title) {
+    color: var(--accent);
+  }
+
+  .post-content :global(blockquote.alert-warning) {
+    border-left-color: #ffbd2e;
+    background-color: rgba(255, 189, 46, 0.04);
+  }
+  .post-content :global(blockquote.alert-warning p.alert-title) {
+    color: #ffbd2e;
+  }
+
+  .post-content :global(blockquote.alert-note) {
+    border-left-color: #38b6ff;
+    background-color: rgba(56, 182, 255, 0.04);
+  }
+  .post-content :global(blockquote.alert-note p.alert-title) {
+    color: #38b6ff;
+  }
+
+  .post-content :global(blockquote.alert-tip) {
+    border-left-color: #00ffcc;
+    background-color: rgba(0, 255, 204, 0.04);
+  }
+  .post-content :global(blockquote.alert-tip p.alert-title) {
+    color: #00ffcc;
+  }
+
+  .post-content :global(blockquote.alert-caution) {
+    border-left-color: #ff5f56;
+    background-color: rgba(255, 95, 86, 0.04);
+  }
+  .post-content :global(blockquote.alert-caution p.alert-title) {
+    color: #ff5f56;
+  }
+
+  .post-content :global(pre) {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: var(--space-md);
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: var(--space-lg);
+  }
+
+  .post-content :global(code) {
+    background: var(--bg-surface-elevated);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+    border-radius: 0;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .post-layout {
+      margin: var(--space-md) auto;
+    }
+    .post-content {
+      font-size: 1rem;
+    }
+  }
+</style>

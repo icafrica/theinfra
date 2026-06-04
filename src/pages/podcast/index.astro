@@ -1,0 +1,245 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+let episodes = [];
+try {
+  episodes = await getCollection('podcast');
+} catch (e) {
+  // Graceful fallback
+}
+
+const sortedEpisodes = episodes.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="Runtime Podcast Broadcast Directory — theinfra" description="Listen to technical dialogues with developers, maintainers, and systems practitioners operating software systems under load. No corporate pitches.">
+  <div class="archive-section container">
+    <header class="archive-header">
+      <span class="section-tag">// RAW INTERACTION</span>
+      <h1 class="archive-title">Runtime <span class="text-glow">Episodes</span></h1>
+      <p class="archive-desc">
+        Select a track below to stream or review technical transcription notes, code references, and configuration resources from the talk.
+      </p>
+    </header>
+
+    <div class="episodes-directory">
+      {sortedEpisodes.length > 0 ? (
+        sortedEpisodes.map((ep) => {
+          const formattedDate = new Date(ep.data.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          return (
+            <article class="episode-row card">
+              <div class="row-num-badge">
+                <span class="lbl">EP</span>
+                <span class="val">{ep.data.episodeNumber}</span>
+              </div>
+              <div class="row-main">
+                <div class="row-meta">
+                  <time datetime={ep.data.date}>{formattedDate}</time>
+                  <span class="sep">•</span>
+                  <span>{ep.data.duration}</span>
+                </div>
+                <h2 class="row-title">
+                  <a href={`/podcast/${ep.id}`}>{ep.data.title}</a>
+                </h2>
+                <p class="row-excerpt">{ep.data.description}</p>
+                {ep.data.tags && (
+                  <div class="tag-row">
+                    {ep.data.tags.map((tag) => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class="row-action">
+                <a href={`/podcast/${ep.id}`} class="btn btn-primary listen-btn">
+                  <span>Show Notes</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+          );
+        })
+      ) : (
+        <div class="card empty-card">
+          <p>No podcast episodes found in database. Initializing collections...</p>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-section {
+    padding: var(--space-xxl) 0;
+    max-width: 900px;
+  }
+
+  .archive-header {
+    margin-bottom: var(--space-xxl);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .episodes-directory {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .episode-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    overflow: hidden;
+  }
+
+  .row-num-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+  }
+
+  .row-num-badge .lbl {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    line-height: 1;
+  }
+
+  .row-num-badge .val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+
+  .row-main {
+    flex-grow: 1;
+    min-width: 0; /* prevent flex overflow */
+    overflow: hidden;
+  }
+
+  .row-meta {
+    display: flex;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: var(--space-xs);
+  }
+
+  .row-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-serif);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .row-title a {
+    color: var(--text-primary);
+  }
+
+  .row-title a:hover {
+    color: var(--accent);
+  }
+
+  .row-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    overflow: hidden;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-muted);
+  }
+
+  .listen-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .empty-card {
+    text-align: center;
+    padding: var(--space-xl);
+    font-family: var(--font-mono);
+    color: var(--text-dim);
+  }
+
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .episode-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .row-num-badge {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .row-num-badge .val {
+      font-size: 1rem;
+    }
+
+    .listen-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .row-action {
+      width: 100%;
+    }
+  }
+</style>

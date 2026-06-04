@@ -1,0 +1,202 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="brand-link">
+        <img src="/wordmark.svg" alt="theinfra Logo" class="footer-logo" height="35" />
+      </a>
+      <p class="brand-description">
+        The parent media ecosystem hosting flagship infrastructure engineering initiatives across emerging markets. Built for practitioners, by practitioners.
+      </p>
+      
+      <!-- System Metadata -->
+      <div class="system-status">
+        <span class="status-dot"></span>
+        <span class="status-text">SYS.STATUS: ONLINE</span>
+        <span class="region-text">• REGION: MULTI-REGION</span>
+      </div>
+    </div>
+    
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4 class="col-title">Initiatives</h4>
+        <ul>
+          <li><a href="https://infraconf.africa" target="_blank" rel="noopener noreferrer">InfraConf Africa</a></li>
+          <li><a href="/newsletter">The Stack Newsletter</a></li>
+          <li><a href="/podcast">Runtime Podcast</a></li>
+          <li><a href="/#workshops">Workshops</a></li>
+          <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">theinfraTV</a></li>
+          <li><a href="https://discord.gg/thelayer" target="_blank" rel="noopener noreferrer">The Layer Discord</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="col-title">Resources</h4>
+        <ul>
+          <li><a href="/newsletter">Newsletter Archive</a></li>
+          <li><a href="/podcast">Podcast Directory</a></li>
+          <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener noreferrer">Speaker CFP</a></li>
+          <li><a href="/#about">About Ecosystem</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="col-title">Connect</h4>
+        <ul>
+          <li><a href="https://twitter.com/theinframedia" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://github.com/icafrica" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://discord.gg/thelayer" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="copyright">&copy; {currentYear} theinfra. All rights reserved. Code licensed under MIT.</p>
+    <div class="tech-specs">
+      <span>ASTRO_VERSION: v6.0</span>
+      <span>•</span>
+      <span>NODE_ENV: PRODUCTION</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer-logo {
+    display: block;
+    height: 35px;
+    width: auto;
+  }
+
+  .brand-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 360px;
+    line-height: 1.6;
+  }
+
+  .system-status {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  .status-text {
+    font-weight: 600;
+  }
+
+  .region-text {
+    margin-left: var(--space-xs);
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .col-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+    position: relative;
+    padding-bottom: var(--space-xs);
+  }
+
+  .col-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 1px;
+    background-color: var(--accent-muted);
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-col a {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+    padding-left: 2px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .tech-specs {
+    display: flex;
+    gap: var(--space-xs);
+    color: var(--text-dim);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .footer-links {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-links {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+  }
+</style>

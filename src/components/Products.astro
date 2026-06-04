@@ -1,0 +1,261 @@
+---
+const initiatives = [
+  {
+    num: "01",
+    name: "InfraConf Africa",
+    type: "Annual Conference",
+    desc: "The flagship event. Fully virtual in 2026, physical from 2027. Strictly infrastructure engineering, systems design, and operations at scale.",
+    status: "CFP OPEN",
+    statusType: "success",
+    link: "https://infraconf.africa",
+    linkText: "Visit Conference Site",
+    isExternal: true
+  },
+  {
+    num: "02",
+    name: "The Stack",
+    type: "Weekly Newsletter",
+    desc: "A weekly digest of infrastructure engineering news, systems architecture deep dives, open-source releases, and practical posts curated by builders.",
+    status: "COMING 2026",
+    statusType: "warning",
+    link: "/newsletter",
+    linkText: "Read Issues",
+    isExternal: false
+  },
+  {
+    num: "03",
+    name: "Runtime",
+    type: "Podcast",
+    desc: "Conversations with platform engineers, kernel developers, SREs, and systems leaders shipping software at high concurrency and scale. No fluff.",
+    status: "COMING 2026",
+    statusType: "warning",
+    link: "/podcast",
+    linkText: "Listen to Episodes",
+    isExternal: false
+  },
+  {
+    num: "04",
+    name: "Workshops",
+    type: "Technical Sessions",
+    desc: "Where infrastructure organizations can submit recorded workshops to be published on theinfraTV. Slots are available via direct booking or as a sponsorship reward.",
+    status: "SUBMISSIONS OPEN",
+    statusType: "success",
+    link: "/#workshops",
+    linkText: "Submit or View Workshops",
+    isExternal: false
+  },
+  {
+    num: "05",
+    name: "theinfraTV",
+    type: "Video / YouTube",
+    desc: "All conference talks, recorded deep-dive engineering tutorials, whiteboard sessions, and system architecture walkthroughs published within one week.",
+    status: "YOUTUBE CHANNEL",
+    statusType: "info",
+    link: "https://youtube.com",
+    linkText: "Subscribe on YouTube",
+    isExternal: true
+  },
+  {
+    num: "06",
+    name: "The Layer",
+    type: "Discord Community",
+    desc: "A Discord community for infrastructure engineers. Dedicated tracks for databases, networking, SRE, orchestration, jobs, and peer mentorship.",
+    status: "JOIN NOW",
+    statusType: "success",
+    link: "https://discord.gg/thelayer",
+    linkText: "Join Discord Server",
+    isExternal: true
+  }
+];
+---
+
+<section id="initiatives" class="initiatives-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">The Ecosystem Layers</h2>
+      <p class="section-subtitle">
+        theinfra organizes and powers six key media channels to elevate systems engineering skills and connect builders.
+      </p>
+    </div>
+
+    <div class="initiatives-grid">
+      {initiatives.map((item) => (
+        <article class="card initiative-card">
+          <div class="card-top">
+            <span class="card-number">{item.num}</span>
+            <span class={`status-tag status-${item.statusType}`}>
+              <span class="status-indicator-dot"></span>
+              {item.status}
+            </span>
+          </div>
+          
+          <div class="card-content">
+            <span class="initiative-type">{item.type}</span>
+            <h3 class="initiative-name">{item.name}</h3>
+            <p class="initiative-desc">{item.desc}</p>
+          </div>
+
+          <div class="card-action">
+            <a href={item.link} target={item.isExternal ? "_blank" : undefined} rel={item.isExternal ? "noopener noreferrer" : undefined} class="action-link">
+              {item.linkText}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .initiatives-section {
+    padding: var(--space-xxl) 0;
+    border-top: 1px solid var(--border-color);
+    background-color: rgba(6, 22, 16, 0.3);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xxl);
+    text-align: left;
+    max-width: 650px;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .initiatives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .initiative-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .card-number {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-muted);
+    opacity: 0.8;
+  }
+
+  .status-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+  }
+
+  .status-indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  /* Status types colors */
+  .status-success {
+    background-color: rgba(127, 255, 197, 0.1);
+    color: var(--accent);
+    border-color: rgba(127, 255, 197, 0.2);
+  }
+  .status-success .status-indicator-dot {
+    background-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  .status-warning {
+    background-color: rgba(255, 189, 46, 0.1);
+    color: #ffbd2e;
+    border-color: rgba(255, 189, 46, 0.2);
+  }
+  .status-warning .status-indicator-dot {
+    background-color: #ffbd2e;
+    box-shadow: 0 0 6px #ffbd2e;
+  }
+
+  .status-info {
+    background-color: rgba(56, 182, 255, 0.1);
+    color: #38b6ff;
+    border-color: rgba(56, 182, 255, 0.2);
+  }
+  .status-info .status-indicator-dot {
+    background-color: #38b6ff;
+    box-shadow: 0 0 6px #38b6ff;
+  }
+
+  .initiative-type {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .initiative-name {
+    font-size: 1.5rem;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .initiative-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-action {
+    margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(26, 77, 60, 0.3);
+  }
+
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .arrow-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  .action-link:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .initiatives-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

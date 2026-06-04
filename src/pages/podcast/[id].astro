@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '@layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  let episodes = [];
+  try {
+    episodes = await getCollection('podcast');
+  } catch (e) {
+    // Dynamic fallback when collection config is empty
+  }
+
+  return episodes.map((ep) => ({
+    params: { id: ep.id },
+    props: { ep },
+  }));
+}
+
+const { ep } = Astro.props;
+const { Content } = await render(ep);
+---
+
+<PostLayout frontmatter={ep.data} backUrl="/podcast" backText="Back to Podcast Broadcast Directory">
+  <Content />
+</PostLayout>

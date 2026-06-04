@@ -1,0 +1,385 @@
+---
+const statusOut = `{
+  "status": "active",
+  "region": "africa",
+  "channels": 6,
+  "engineers": "50k+"
+}`;
+const subscribeOut = `Subscribing to The Stack...
+[✓] Confirmed. Next issue: Friday 06:00 UTC.
+    SRE deep dives | kernel internals | infra tools`;
+const pingOut = `PING infraconf.africa
+64 bytes: time=14.2 ms
+64 bytes: time=12.8 ms
+
+3 packets, 0% loss · rtt avg 13.4 ms`;
+---
+<section class="hero-section">
+  <div class="container hero-container">
+    <!-- Left: Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        <span class="badge-text">SYSTEM LAYER · V1.0.0</span>
+      </div>
+
+      <h1 class="hero-title">
+        The Media Ecosystem for<br />
+        <span class="text-glow">Infrastructure Engineers</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        High-signal, zero-fluff content for the engineers building the next generation of scale.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#initiatives" class="btn btn-primary">Explore Initiatives</a>
+        <a href="/newsletter" class="btn">The Stack →</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Channels</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">50k+</span>
+          <span class="stat-label">Engineers</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Countries</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Minimal Terminal -->
+    <div class="hero-terminal">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="dot close"></span>
+          <span class="dot minimize"></span>
+          <span class="dot expand"></span>
+        </div>
+        <span class="terminal-title">theinfra ~ bash</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd" id="typed-cmd">curl theinfra.media/status</span>
+        </div>
+        <pre class="terminal-output" id="terminal-out">{statusOut}</pre>
+        <div class="terminal-actions" id="terminal-actions">
+          <button class="action-btn" data-cmd="cat status.json" data-out={statusOut}>cat status</button>
+          <button class="action-btn" data-cmd="subscribe --stack" data-out={subscribeOut}>subscribe</button>
+          <button class="action-btn" data-cmd="ping infraconf.africa" data-out={pingOut}>ping conf</button>
+        </div>
+        <div class="terminal-cursor-line">
+          <span class="prompt">$</span>
+          <span class="cursor">_</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const actionBtns = document.querySelectorAll('.action-btn');
+  const cmdDisplay = document.getElementById('typed-cmd');
+  const outputDisplay = document.getElementById('terminal-out');
+
+  actionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd') || '';
+      const out = btn.getAttribute('data-out') || '';
+
+      // Remove active from all
+      actionBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Type command
+      if (cmdDisplay) {
+        cmdDisplay.textContent = '';
+        let i = 0;
+        const interval = setInterval(() => {
+          cmdDisplay.textContent += cmd.charAt(i);
+          i++;
+          if (i >= cmd.length) {
+            clearInterval(interval);
+            if (outputDisplay) {
+              outputDisplay.style.opacity = '0.4';
+              setTimeout(() => {
+                if (outputDisplay) {
+                  outputDisplay.textContent = out;
+                  outputDisplay.style.opacity = '1';
+                }
+              }, 180);
+            }
+          }
+        }, 35);
+      }
+    });
+  });
+</script>
+
+<style>
+  .hero-section {
+    padding: 5rem 0 4rem;
+    min-height: calc(90vh - var(--header-height));
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* ── Left Content ── */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(127, 255, 197, 0.06);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    width: fit-content;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .text-glow {
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  /* Stats row */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0.5rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border-color);
+  }
+
+  /* ── Terminal ── */
+  .hero-terminal {
+    background: #040e09;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(127, 255, 197, 0.05);
+  }
+
+  .terminal-header {
+    background: #061410;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .close     { background: #ff5f56; }
+  .minimize  { background: #ffbd2e; }
+  .expand    { background: #27c93f; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin: 0 auto;
+    padding-right: 4.5rem; /* balance the dots */
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .terminal-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .prompt {
+    color: var(--accent-muted);
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .cmd {
+    color: var(--text-primary);
+  }
+
+  .terminal-output {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0.75rem;
+    background: rgba(127, 255, 197, 0.03);
+    border-radius: 5px;
+    border-left: 2px solid var(--border-color);
+    white-space: pre;
+    overflow-x: auto;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Action buttons */
+  .terminal-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    padding-top: 0.25rem;
+  }
+
+  .action-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .action-btn:hover,
+  .action-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(127, 255, 197, 0.05);
+  }
+
+  .terminal-cursor-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cursor {
+    color: var(--accent);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    from, to { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero-section {
+      padding: 3rem 0;
+      min-height: auto;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+    }
+
+    .hero-subtitle {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas {
+      flex-direction: column;
+    }
+
+    .hero-ctas .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+</style>

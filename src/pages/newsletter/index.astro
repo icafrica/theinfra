@@ -1,0 +1,231 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+let issues = [];
+try {
+  issues = await getCollection('newsletter');
+} catch (e) {
+  // Graceful fallback for empty collection
+}
+
+const sortedIssues = issues.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="The Stack Newsletter Archive — theinfra" description="Weekly digest archive covering SRE patterns, Linux kernel tweaks, database internals, and systems architecture. No corporate fluff.">
+  <div class="archive-section container">
+    <header class="archive-header">
+      <span class="section-tag">// KNOWLEDGE BASE</span>
+      <h1 class="archive-title">The Stack <span class="text-glow">Archive</span></h1>
+      <p class="archive-desc">
+        Explore our database of past weekly deep dives. Select a topic or issue number to inspect raw engineering telemetry.
+      </p>
+    </header>
+
+    <div class="issues-list">
+      {sortedIssues.length > 0 ? (
+        sortedIssues.map((issue) => {
+          const formattedDate = new Date(issue.data.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          return (
+            <article class="issue-card card">
+              <div class="card-left">
+                <span class="issue-number">#{issue.data.issueNumber}</span>
+              </div>
+              <div class="card-body-content">
+                <time datetime={issue.data.date} class="issue-date">{formattedDate}</time>
+                <h2 class="issue-title">
+                  <a href={`/newsletter/${issue.id}`}>{issue.data.title}</a>
+                </h2>
+                <p class="issue-excerpt">{issue.data.description}</p>
+                {issue.data.tags && (
+                  <div class="tag-row">
+                    {issue.data.tags.map((tag) => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class="card-right">
+                <a href={`/newsletter/${issue.id}`} class="read-btn btn">
+                  <span>Inspect</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+          );
+        })
+      ) : (
+        <div class="card empty-card">
+          <p>No newsletter issues found in database. Initializing collections...</p>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-section {
+    padding: var(--space-xxl) 0;
+    max-width: 900px;
+  }
+
+  .archive-header {
+    margin-bottom: var(--space-xxl);
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .issues-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .issue-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    overflow: hidden;
+  }
+
+  .card-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .issue-number {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-body-content {
+    flex-grow: 1;
+    min-width: 0; /* prevent flex overflow */
+    overflow: hidden;
+  }
+
+  .issue-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .issue-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-serif);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .issue-title a {
+    color: var(--text-primary);
+  }
+
+  .issue-title a:hover {
+    color: var(--accent);
+  }
+
+  .issue-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    overflow: hidden;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-muted);
+  }
+
+  .read-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .empty-card {
+    text-align: center;
+    padding: var(--space-xl);
+    font-family: var(--font-mono);
+    color: var(--text-dim);
+  }
+
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .issue-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .card-left {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .issue-number {
+      font-size: 1rem;
+    }
+
+    .read-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .card-right {
+      width: 100%;
+    }
+  }
+</style>

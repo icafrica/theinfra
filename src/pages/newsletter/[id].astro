@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '@layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  let issues = [];
+  try {
+    issues = await getCollection('newsletter');
+  } catch (e) {
+    // Dynamic fallback when collection config is empty
+  }
+
+  return issues.map((issue) => ({
+    params: { id: issue.id },
+    props: { issue },
+  }));
+}
+
+const { issue } = Astro.props;
+const { Content } = await render(issue);
+---
+
+<PostLayout frontmatter={issue.data} backUrl="/newsletter" backText="Back to Newsletter Archive">
+  <Content />
+</PostLayout>
