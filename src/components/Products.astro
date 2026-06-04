@@ -1,4 +1,6 @@
 ---
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
 const initiatives = [
   {
     num: "01",
@@ -18,7 +20,7 @@ const initiatives = [
     desc: "A weekly digest of infrastructure engineering news, systems architecture deep dives, open-source releases, and practical posts curated by builders.",
     status: "COMING 2026",
     statusType: "warning",
-    link: "/newsletter",
+    link: base + "newsletter",
     linkText: "Read Issues",
     isExternal: false
   },
@@ -29,7 +31,7 @@ const initiatives = [
     desc: "Conversations with platform engineers, kernel developers, SREs, and systems leaders shipping software at high concurrency and scale. No fluff.",
     status: "COMING 2026",
     statusType: "warning",
-    link: "/podcast",
+    link: base + "podcast",
     linkText: "Listen to Episodes",
     isExternal: false
   },
@@ -40,7 +42,7 @@ const initiatives = [
     desc: "Where infrastructure organizations can submit recorded workshops to be published on theinfraTV. Slots are available via direct booking or as a sponsorship reward.",
     status: "SUBMISSIONS OPEN",
     statusType: "success",
-    link: "/#workshops",
+    link: base + "#workshops",
     linkText: "Submit or View Workshops",
     isExternal: false
   },

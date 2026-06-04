@@ -13,6 +13,8 @@ const pingOut = `PING infraconf.africa
 64 bytes: time=12.8 ms
 
 3 packets, 0% loss · rtt avg 13.4 ms`;
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 <section class="hero-section">
   <div class="container hero-container">
@@ -34,7 +36,7 @@ const pingOut = `PING infraconf.africa
 
       <div class="hero-ctas">
         <a href="#initiatives" class="btn btn-primary">Explore Initiatives</a>
-        <a href="/newsletter" class="btn">The Stack →</a>
+        <a href={`${base}newsletter`} class="btn">The Stack →</a>
       </div>
 
       <div class="hero-stats">

@@ -50,6 +50,8 @@ function remarkGfmAlerts() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://icafrica.github.io',
+  base: '/theinfra',
   markdown: {
     processor: unified({
       remarkPlugins: [remarkGfmAlerts]

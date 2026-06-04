@@ -10,6 +10,7 @@ try {
 }
 
 const sortedIssues = issues.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout title="The Stack Newsletter Archive — theinfra" description="Weekly digest archive covering SRE patterns, Linux kernel tweaks, database internals, and systems architecture. No corporate fluff.">
@@ -39,7 +40,7 @@ const sortedIssues = issues.sort((a, b) => new Date(b.data.date).getTime() - new
               <div class="card-body-content">
                 <time datetime={issue.data.date} class="issue-date">{formattedDate}</time>
                 <h2 class="issue-title">
-                  <a href={`/newsletter/${issue.id}`}>{issue.data.title}</a>
+                  <a href={`${base}newsletter/${issue.id}`}>{issue.data.title}</a>
                 </h2>
                 <p class="issue-excerpt">{issue.data.description}</p>
                 {issue.data.tags && (
@@ -51,7 +52,7 @@ const sortedIssues = issues.sort((a, b) => new Date(b.data.date).getTime() - new
                 )}
               </div>
               <div class="card-right">
-                <a href={`/newsletter/${issue.id}`} class="read-btn btn">
+                <a href={`${base}newsletter/${issue.id}`} class="read-btn btn">
                   <span>Inspect</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>

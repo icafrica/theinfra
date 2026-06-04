@@ -18,8 +18,9 @@ export async function getStaticPaths() {
 
 const { ep } = Astro.props;
 const { Content } = await render(ep);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<PostLayout frontmatter={ep.data} backUrl="/podcast" backText="Back to Podcast Broadcast Directory">
+<PostLayout frontmatter={ep.data} backUrl={`${base}podcast`} backText="Back to Podcast Broadcast Directory">
   <Content />
 </PostLayout>

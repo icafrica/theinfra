@@ -1,12 +1,13 @@
 ---
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <footer>
   <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="brand-link">
-        <img src="/wordmark.svg" alt="theinfra Logo" class="footer-logo" height="35" />
+     <div class="footer-brand">
+      <a href={base} class="brand-link">
+        <img src={`${base}wordmark.svg`} alt="theinfra Logo" class="footer-logo" height="35" />
       </a>
       <p class="brand-description">
         The parent media ecosystem hosting flagship infrastructure engineering initiatives across emerging markets. Built for practitioners, by practitioners.
@@ -25,9 +26,9 @@ const currentYear = new Date().getFullYear();
         <h4 class="col-title">Initiatives</h4>
         <ul>
           <li><a href="https://infraconf.africa" target="_blank" rel="noopener noreferrer">InfraConf Africa</a></li>
-          <li><a href="/newsletter">The Stack Newsletter</a></li>
-          <li><a href="/podcast">Runtime Podcast</a></li>
-          <li><a href="/#workshops">Workshops</a></li>
+          <li><a href={`${base}newsletter`}>The Stack Newsletter</a></li>
+          <li><a href={`${base}podcast`}>Runtime Podcast</a></li>
+          <li><a href={`${base}#workshops`}>Workshops</a></li>
           <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">theinfraTV</a></li>
           <li><a href="https://discord.gg/thelayer" target="_blank" rel="noopener noreferrer">The Layer Discord</a></li>
         </ul>
@@ -36,10 +37,10 @@ const currentYear = new Date().getFullYear();
       <div class="footer-col">
         <h4 class="col-title">Resources</h4>
         <ul>
-          <li><a href="/newsletter">Newsletter Archive</a></li>
-          <li><a href="/podcast">Podcast Directory</a></li>
+          <li><a href={`${base}newsletter`}>Newsletter Archive</a></li>
+          <li><a href={`${base}podcast`}>Podcast Directory</a></li>
           <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener noreferrer">Speaker CFP</a></li>
-          <li><a href="/#about">About Ecosystem</a></li>
+          <li><a href={`${base}#about`}>About Ecosystem</a></li>
         </ul>
       </div>
 

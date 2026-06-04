@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
 let episodes = [];
 try {
   episodes = await getCollection('podcast');
@@ -81,7 +83,7 @@ const displayEpisodes = recentEpisodes.length > 0 ? recentEpisodes : mockEpisode
               <span class="ep-duration">• {ep.data.duration}</span>
             </div>
             <h4 class="ep-title">
-              <a href={`/podcast/${ep.id}`}>{ep.data.title}</a>
+              <a href={`${base}podcast/${ep.id}`}>{ep.data.title}</a>
             </h4>
             <p class="ep-desc">{ep.data.description}</p>
             <div class="ep-player-mock">
@@ -97,7 +99,7 @@ const displayEpisodes = recentEpisodes.length > 0 ? recentEpisodes : mockEpisode
         ))}
       </div>
       <div class="more-episodes-link">
-        <a href="/podcast" class="btn btn-more">Browse All Episodes</a>
+        <a href={`${base}podcast`} class="btn btn-more">Browse All Episodes</a>
       </div>
     </div>
   </div>

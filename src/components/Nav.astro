@@ -1,9 +1,10 @@
 ---
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 <header class="navbar">
   <div class="container nav-container">
-    <a href="/" class="brand">
-      <img src="/wordmark.svg" alt="theinfra Logo" class="logo" height="40" />
+    <a href={base} class="brand">
+      <img src={`${base}wordmark.svg`} alt="theinfra Logo" class="logo" height="40" />
     </a>
     
     <!-- Mobile Hamburger Toggle -->
@@ -16,9 +17,9 @@
     <!-- Navigation Links -->
     <nav class="nav-menu" id="nav-menu">
       <ul class="nav-list">
-        <li><a href="/#initiatives" class="nav-link">Initiatives</a></li>
-        <li><a href="/newsletter" class="nav-link">Newsletter</a></li>
-        <li><a href="/podcast" class="nav-link">Podcast</a></li>
+        <li><a href={`${base}#initiatives`} class="nav-link">Initiatives</a></li>
+        <li><a href={`${base}newsletter`} class="nav-link">Newsletter</a></li>
+        <li><a href={`${base}podcast`} class="nav-link">Podcast</a></li>
         <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener noreferrer" class="nav-link external-link">
           InfraConf CFP
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="external-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>

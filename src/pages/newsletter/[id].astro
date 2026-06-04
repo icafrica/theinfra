@@ -18,8 +18,9 @@ export async function getStaticPaths() {
 
 const { issue } = Astro.props;
 const { Content } = await render(issue);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<PostLayout frontmatter={issue.data} backUrl="/newsletter" backText="Back to Newsletter Archive">
+<PostLayout frontmatter={issue.data} backUrl={`${base}newsletter`} backText="Back to Newsletter Archive">
   <Content />
 </PostLayout>
