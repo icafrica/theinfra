@@ -1,19 +1,4 @@
 ---
-const statusOut = `{
-  "status": "active",
-  "region": "africa",
-  "channels": 6,
-  "engineers": "50k+"
-}`;
-const subscribeOut = `Subscribing to The Stack...
-[✓] Confirmed. Next issue: Friday 06:00 UTC.
-    SRE deep dives | kernel internals | infra tools`;
-const pingOut = `PING infraconf.africa
-64 bytes: time=14.2 ms
-64 bytes: time=12.8 ms
-
-3 packets, 0% loss · rtt avg 13.4 ms`;
-
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 <section class="hero-section">
@@ -57,73 +42,173 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       </div>
     </div>
 
-    <!-- Right: Minimal Terminal -->
-    <div class="hero-terminal">
-      <div class="terminal-header">
-        <div class="terminal-dots">
-          <span class="dot close"></span>
-          <span class="dot minimize"></span>
-          <span class="dot expand"></span>
-        </div>
-        <span class="terminal-title">theinfra ~ bash</span>
-      </div>
-      <div class="terminal-body">
-        <div class="terminal-line">
-          <span class="prompt">$</span>
-          <span class="cmd" id="typed-cmd">curl theinfra.media/status</span>
-        </div>
-        <pre class="terminal-output" id="terminal-out">{statusOut}</pre>
-        <div class="terminal-actions" id="terminal-actions">
-          <button class="action-btn" data-cmd="cat status.json" data-out={statusOut}>cat status</button>
-          <button class="action-btn" data-cmd="subscribe --stack" data-out={subscribeOut}>subscribe</button>
-          <button class="action-btn" data-cmd="ping infraconf.africa" data-out={pingOut}>ping conf</button>
-        </div>
-        <div class="terminal-cursor-line">
-          <span class="prompt">$</span>
-          <span class="cursor">_</span>
-        </div>
-      </div>
+    <!-- Right: Interactive African Geometric Tech Artwork -->
+    <div class="hero-artwork-wrapper">
+      <div class="artwork-bg-grid"></div>
+      <svg class="hero-artwork" viewBox="0 0 500 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="THE INFRA - African Geometric Tech Typography">
+        <!-- Background decorative circuit paths -->
+        <g class="circuit-layer" opacity="0.15">
+          <path class="glowing-circuit" d="M 50 130 h 400 M 100 0 v 260 M 400 0 v 260" stroke="#7fffc5" stroke-width="1.5" />
+          <path class="glowing-circuit circuit-delay-1" d="M 0 65 h 500 M 200 0 v 260 M 300 0 v 260" stroke="#7fffc5" stroke-width="1" />
+          <path class="glowing-circuit circuit-delay-2" d="M 0 195 h 500" stroke="#7fffc5" stroke-width="1" />
+        </g>
+        
+        <!-- Decorative geometric symbols -->
+        <g class="decorative-symbols" opacity="0.4">
+          <!-- Chevron symbols at top-left -->
+          <path d="M 20 20 l 10 10 l 10 -10 M 20 30 l 10 10 l 10 -10" stroke="#7fffc5" stroke-width="1.5" fill="none" />
+          <!-- Concentric diamond at top-right -->
+          <polygon points="460 35, 475 20, 490 35, 475 50" fill="none" stroke="#d97706" stroke-width="1.5" />
+          <polygon points="465 35, 475 25, 485 35, 475 45" fill="none" stroke="#7fffc5" stroke-width="1" />
+          <!-- Concentric circles at bottom-left -->
+          <circle cx="35" cy="225" r="15" stroke="#7fffc5" stroke-width="1" fill="none" stroke-dasharray="3 3" />
+          <circle cx="35" cy="225" r="8" stroke="#d97706" stroke-width="1.5" fill="none" />
+          <!-- Triangle symbols at bottom-right -->
+          <polygon points="455 235, 470 210, 485 235" fill="none" stroke="#7fffc5" stroke-width="1.5" />
+        </g>
+        
+        <!-- Row 1: THE -->
+        <g class="letter" id="letter-t">
+          <!-- Top bar -->
+          <rect x="110" y="10" width="80" height="20" rx="3" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="120" cy="20" r="3.5" fill="#d97706" />
+          <circle cx="135" cy="20" r="3.5" fill="#7fffc5" />
+          <circle cx="150" cy="20" r="3.5" fill="#d97706" />
+          <circle cx="165" cy="20" r="3.5" fill="#7fffc5" />
+          <circle cx="180" cy="20" r="3.5" fill="#d97706" />
+          <!-- Stem -->
+          <rect x="140" y="30" width="20" height="80" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 140 40 l 10 10 l 10 -10 M 140 52 l 10 10 l 10 -10 M 140 64 l 10 10 l 10 -10 M 140 76 l 10 10 l 10 -10 M 140 88 l 10 10 l 10 -10 M 140 100 l 10 10 l 10 -10" stroke="#7fffc5" stroke-width="2" fill="none" stroke-linecap="round" />
+        </g>
+        
+        <g class="letter" id="letter-h">
+          <!-- Left stem -->
+          <rect x="210" y="10" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 210 20 l 10 10 l 10 -10 l -10 -10 z M 210 45 l 10 10 l 10 -10 l -10 -10 z M 210 70 l 10 10 l 10 -10 l -10 -10 z M 210 95 l 10 10 l 10 -10 l -10 -10 z" stroke="#7fffc5" stroke-width="1.5" fill="none" />
+          <circle cx="220" cy="20" r="1.5" fill="#d97706" />
+          <circle cx="220" cy="45" r="1.5" fill="#d97706" />
+          <circle cx="220" cy="70" r="1.5" fill="#d97706" />
+          <circle cx="220" cy="95" r="1.5" fill="#d97706" />
+          <!-- Right stem -->
+          <rect x="270" y="10" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 270 20 l 20 10 M 270 35 l 20 10 M 270 50 l 20 10 M 270 65 l 20 10 M 270 80 l 20 10 M 270 95 l 20 10" stroke="#7fffc5" stroke-width="2" stroke-linecap="round" />
+          <!-- Crossbar -->
+          <rect x="230" y="50" width="40" height="20" fill="#d97706" stroke="#d97706" stroke-width="2" />
+          <circle cx="240" cy="60" r="3" fill="#05150f" />
+          <circle cx="250" cy="60" r="3" fill="#7fffc5" />
+          <circle cx="260" cy="60" r="3" fill="#05150f" />
+        </g>
+        
+        <g class="letter" id="letter-e">
+          <!-- Stem -->
+          <rect x="310" y="10" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 310 20 l 10 10 l 10 -10 M 310 40 l 10 10 l 10 -10 M 310 60 l 10 10 l 10 -10 M 310 80 l 10 10 l 10 -10 M 310 100 l 10 10 l 10 -10" stroke="#7fffc5" stroke-width="2" fill="none" stroke-linecap="round" />
+          <!-- Top bar -->
+          <rect x="330" y="10" width="60" height="18" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="345" cy="19" r="3" fill="#d97706" />
+          <circle cx="360" cy="19" r="3" fill="#7fffc5" />
+          <circle cx="375" cy="19" r="3" fill="#d97706" />
+          <!-- Middle bar -->
+          <rect x="330" y="51" width="45" height="18" fill="#d97706" stroke="#d97706" stroke-width="2" />
+          <circle cx="342.5" cy="60" r="3" fill="#05150f" />
+          <circle cx="352.5" cy="60" r="3" fill="#7fffc5" />
+          <circle cx="362.5" cy="60" r="3" fill="#05150f" />
+          <!-- Bottom bar -->
+          <rect x="330" y="92" width="60" height="18" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="345" cy="101" r="3" fill="#d97706" />
+          <circle cx="360" cy="101" r="3" fill="#7fffc5" />
+          <circle cx="375" cy="101" r="3" fill="#d97706" />
+        </g>
+        
+        <!-- Row 2: INFRA -->
+        <g class="letter" id="letter-i">
+          <rect x="10" y="140" width="20" height="100" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <path d="M 10 150 l 10 10 l 10 -10 l -10 -10 z M 10 175 l 10 10 l 10 -10 l -10 -10 z M 10 200 l 10 10 l 10 -10 l -10 -10 z M 10 225 l 10 10 l 10 -10 l -10 -10 z" stroke="#7fffc5" stroke-width="1.5" fill="none" />
+          <circle cx="20" cy="150" r="1.5" fill="#d97706" />
+          <circle cx="20" cy="175" r="1.5" fill="#d97706" />
+          <circle cx="20" cy="200" r="1.5" fill="#d97706" />
+          <circle cx="20" cy="225" r="1.5" fill="#d97706" />
+        </g>
+        
+        <g class="letter" id="letter-n">
+          <!-- Left stem -->
+          <rect x="110" y="140" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 110 150 l 20 -10 M 110 165 l 20 -10 M 110 180 l 20 -10 M 110 195 l 20 -10 M 110 210 l 20 -10 M 110 225 l 20 -10 M 110 240 l 20 -10" stroke="#7fffc5" stroke-width="2" stroke-linecap="round" />
+          <!-- Diagonal connector -->
+          <path d="M 130 140 L 170 240 h -20 L 110 140 z" fill="#d97706" />
+          <path d="M 120 140 L 160 240 M 125 140 L 165 240" stroke="#05150f" stroke-width="2" />
+          <!-- Right stem -->
+          <rect x="170" y="140" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 170 140 l 20 10 M 170 155 l 20 10 M 170 170 l 20 10 M 170 185 l 20 10 M 170 200 l 20 10 M 170 215 l 20 10 M 170 230 l 20 10" stroke="#7fffc5" stroke-width="2" stroke-linecap="round" />
+        </g>
+        
+        <g class="letter" id="letter-f">
+          <!-- Stem -->
+          <rect x="210" y="140" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 210 150 l 10 10 l 10 -10 M 210 170 l 10 10 l 10 -10 M 210 190 l 10 10 l 10 -10 M 210 210 l 10 10 l 10 -10 M 210 230 l 10 10 l 10 -10" stroke="#7fffc5" stroke-width="2" fill="none" stroke-linecap="round" />
+          <!-- Top bar -->
+          <rect x="230" y="140" width="60" height="18" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="245" cy="149" r="3" fill="#d97706" />
+          <circle cx="260" cy="149" r="3" fill="#7fffc5" />
+          <circle cx="275" cy="149" r="3" fill="#d97706" />
+          <!-- Middle bar -->
+          <rect x="230" y="181" width="45" height="18" fill="#d97706" stroke="#d97706" stroke-width="2" />
+          <circle cx="242.5" cy="190" r="3" fill="#05150f" />
+          <circle cx="252.5" cy="190" r="3" fill="#7fffc5" />
+          <circle cx="262.5" cy="190" r="3" fill="#05150f" />
+        </g>
+        
+        <g class="letter" id="letter-r">
+          <!-- Stem -->
+          <rect x="310" y="140" width="20" height="100" stroke="#7fffc5" stroke-width="2" fill="none" />
+          <path d="M 310 150 l 20 10 M 310 165 l 20 10 M 310 180 l 20 10 M 310 195 l 20 10 M 310 210 l 20 10 M 310 225 l 20 10" stroke="#7fffc5" stroke-width="2" stroke-linecap="round" />
+          <!-- Loop -->
+          <path d="M 330 140 h 30 c 15 0 25 10 25 25 s -10 25 -25 25 h -30 z" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="345" cy="152" r="3" fill="#d97706" />
+          <circle cx="360" cy="152" r="3" fill="#7fffc5" />
+          <circle cx="372" cy="165" r="3" fill="#d97706" />
+          <circle cx="360" cy="178" r="3" fill="#7fffc5" />
+          <circle cx="345" cy="178" r="3" fill="#d97706" />
+          <!-- Leg -->
+          <path d="M 345 190 L 385 240 h -20 L 330 195 z" fill="#d97706" />
+          <path d="M 340 198 L 370 240" stroke="#05150f" stroke-width="2" stroke-linecap="round" />
+        </g>
+        
+        <g class="letter" id="letter-a">
+          <!-- Left leg -->
+          <path d="M 410 240 L 440 140 h 15 L 430 240 z" stroke="#7fffc5" stroke-width="2" fill="#05150f" />
+          <path d="M 412 230 l 15 -50 M 417 215 l 15 -50 M 422 200 l 15 -50" stroke="#7fffc5" stroke-width="1.5" stroke-linecap="round" />
+          <!-- Right leg -->
+          <path d="M 455 140 L 485 240 h -15 L 445 140 z" fill="#d97706" />
+          <path d="M 452 160 l 15 50 M 457 180 l 15 50" stroke="#05150f" stroke-width="1.5" stroke-linecap="round" />
+          <!-- Crossbar -->
+          <path d="M 430 200 h 25 v 12 h -25 z" fill="#0a251b" stroke="#7fffc5" stroke-width="2" />
+          <circle cx="442.5" cy="206" r="3.5" fill="#d97706" />
+        </g>
+      </svg>
     </div>
   </div>
 </section>
 
 <script>
-  const actionBtns = document.querySelectorAll('.action-btn');
-  const cmdDisplay = document.getElementById('typed-cmd');
-  const outputDisplay = document.getElementById('terminal-out');
-
-  actionBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cmd = btn.getAttribute('data-cmd') || '';
-      const out = btn.getAttribute('data-out') || '';
-
-      // Remove active from all
-      actionBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Type command
-      if (cmdDisplay) {
-        cmdDisplay.textContent = '';
-        let i = 0;
-        const interval = setInterval(() => {
-          cmdDisplay.textContent += cmd.charAt(i);
-          i++;
-          if (i >= cmd.length) {
-            clearInterval(interval);
-            if (outputDisplay) {
-              outputDisplay.style.opacity = '0.4';
-              setTimeout(() => {
-                if (outputDisplay) {
-                  outputDisplay.textContent = out;
-                  outputDisplay.style.opacity = '1';
-                }
-              }, 180);
-            }
-          }
-        }, 35);
-      }
-    });
-  });
+  // Add simple ambient pulse animation to the letters on a random cycle
+  const letters = document.querySelectorAll('.letter');
+  
+  function triggerAmbientPulse() {
+    const randomIndex = Math.floor(Math.random() * letters.length);
+    const letter = letters[randomIndex];
+    if (letter && letter instanceof SVGElement && letter.style) {
+      letter.style.filter = 'drop-shadow(0 0 15px rgba(127, 255, 197, 0.8))';
+      setTimeout(() => {
+        if (letter && letter.style) {
+          letter.style.filter = '';
+        }
+      }, 800);
+    }
+  }
+  
+  // Pulse every 6 seconds randomly
+  setInterval(triggerAmbientPulse, 6000 + Math.random() * 2000);
 </script>
 
 <style>
@@ -228,128 +313,114 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     background: var(--border-color);
   }
 
-  /* ── Terminal ── */
-  .hero-terminal {
-    background: #040e09;
+  /* ── Geometric Tech Artwork ── */
+  .hero-artwork-wrapper {
+    background: rgba(10, 37, 27, 0.35);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(127, 255, 197, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
   }
 
-  .terminal-header {
-    background: #061410;
-    padding: 0.6rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .terminal-dots {
-    display: flex;
-    gap: 5px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .close     { background: #ff5f56; }
-  .minimize  { background: #ffbd2e; }
-  .expand    { background: #27c93f; }
-
-  .terminal-title {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    margin: 0 auto;
-    padding-right: 4.5rem; /* balance the dots */
-  }
-
-  .terminal-body {
-    padding: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .terminal-line {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .prompt {
-    color: var(--accent-muted);
-    user-select: none;
-    flex-shrink: 0;
-  }
-
-  .cmd {
-    color: var(--text-primary);
-  }
-
-  .terminal-output {
-    color: var(--text-dim);
-    font-size: 0.78rem;
-    line-height: 1.55;
-    margin: 0;
-    padding: 0.75rem;
-    background: rgba(127, 255, 197, 0.03);
-    border-radius: 5px;
-    border-left: 2px solid var(--border-color);
-    white-space: pre;
-    overflow-x: auto;
-    transition: opacity 0.2s ease;
-  }
-
-  /* Action buttons */
-  .terminal-actions {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    padding-top: 0.25rem;
-  }
-
-  .action-btn {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    color: var(--text-dim);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-  }
-
-  .action-btn:hover,
-  .action-btn.active {
+  .hero-artwork-wrapper:hover {
     border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(127, 255, 197, 0.05);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 12px rgba(127, 255, 197, 0.25);
   }
 
-  .terminal-cursor-line {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  /* Grid backdrop */
+  .artwork-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-size: 20px 20px;
+    background-image: 
+      linear-gradient(to right, rgba(127, 255, 197, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(127, 255, 197, 0.03) 1px, transparent 1px);
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .cursor {
-    color: var(--accent);
-    animation: blink 1s step-end infinite;
+  .hero-artwork {
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    z-index: 1;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4));
   }
 
-  @keyframes blink {
-    from, to { opacity: 1; }
-    50%       { opacity: 0; }
+  /* Letter Styling & Interactions */
+  .letter {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .letter:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 10px rgba(127, 255, 197, 0.7));
+  }
+
+  /* Specific transform origins for center scaling of each letter */
+  #letter-t { transform-origin: 150px 70px; }
+  #letter-h { transform-origin: 250px 70px; }
+  #letter-e { transform-origin: 350px 70px; }
+  #letter-i { transform-origin: 20px 190px; }
+  #letter-n { transform-origin: 150px 190px; }
+  #letter-f { transform-origin: 250px 190px; }
+  #letter-r { transform-origin: 350px 190px; }
+  #letter-a { transform-origin: 450px 190px; }
+
+  /* Circuit Layer Animations */
+  .glowing-circuit {
+    stroke-dasharray: 20 30;
+    stroke-dashoffset: 0;
+    animation: circuitFlow 12s linear infinite;
+  }
+
+  .circuit-delay-1 {
+    animation-delay: -4s;
+    animation-duration: 15s;
+  }
+
+  .circuit-delay-2 {
+    animation-delay: -8s;
+    animation-duration: 9s;
+  }
+
+  @keyframes circuitFlow {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+
+  /* Floating symbol micro-movements */
+  .decorative-symbols path,
+  .decorative-symbols polygon,
+  .decorative-symbols circle {
+    animation: float 6s ease-in-out infinite alternate;
+  }
+
+  .decorative-symbols polygon {
+    animation-delay: -2s;
+  }
+
+  .decorative-symbols circle {
+    animation-delay: -4s;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-4px) rotate(1deg);
+    }
   }
 
   /* ── Responsive ── */
